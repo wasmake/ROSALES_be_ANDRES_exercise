@@ -1,0 +1,3 @@
+clients:
+    users-api-host: http://test.com/users
+    teams-api-host: http://test.com/teams

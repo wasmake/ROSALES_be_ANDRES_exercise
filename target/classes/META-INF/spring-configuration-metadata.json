@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "clients",
+      "type": "com.ecore.roles.configuration.ClientsConfigurationProperties",
+      "sourceType": "com.ecore.roles.configuration.ClientsConfigurationProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "clients.teams-api-host",
+      "type": "java.lang.String",
+      "sourceType": "com.ecore.roles.configuration.ClientsConfigurationProperties"
+    },
+    {
+      "name": "clients.users-api-host",
+      "type": "java.lang.String",
+      "sourceType": "com.ecore.roles.configuration.ClientsConfigurationProperties"
+    }
+  ],
+  "hints": []
+}

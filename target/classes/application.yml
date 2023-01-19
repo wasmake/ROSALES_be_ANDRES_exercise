@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:test
+    username: a
+    password: password
+
+clients:
+  users-api-host: https://cgjresszgg.execute-api.eu-west-1.amazonaws.com/users
+  teams-api-host: https://cgjresszgg.execute-api.eu-west-1.amazonaws.com/teams
