@@ -29,12 +29,12 @@ public class RolesRestController implements RolesApi {
     public ResponseEntity<RoleDto> createRole(
             @Valid @RequestBody RoleDto role) {
         return ResponseEntity
-                .status(200)
+                .status(201)
                 .body(fromModel(rolesService.createRole(role.toModel())));
     }
 
     @Override
-    @PostMapping(
+    @GetMapping(
             produces = {"application/json"})
     public ResponseEntity<List<RoleDto>> getRoles() {
 
@@ -53,7 +53,7 @@ public class RolesRestController implements RolesApi {
     }
 
     @Override
-    @PostMapping(
+    @GetMapping(
             path = "/{roleId}",
             produces = {"application/json"})
     public ResponseEntity<RoleDto> getRole(
@@ -61,6 +61,18 @@ public class RolesRestController implements RolesApi {
         return ResponseEntity
                 .status(200)
                 .body(fromModel(rolesService.getRole(roleId)));
+    }
+
+    @Override
+    @GetMapping(
+            path = "/search",
+            produces = {"application/json"})
+    public ResponseEntity<RoleDto> getRole(
+            @RequestParam UUID teamId,
+            @RequestParam UUID teamMemberId) {
+        return ResponseEntity
+                .status(200)
+                .body(fromModel(rolesService.getRole(teamId, teamMemberId)));
     }
 
 }

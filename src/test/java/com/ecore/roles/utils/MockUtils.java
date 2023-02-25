@@ -20,7 +20,7 @@ public class MockUtils {
 
     public static void mockGetUserById(MockRestServiceServer mockServer, UUID userId, User user) {
         try {
-            mockServer.expect(requestTo("http://test.com/users/" + userId))
+            mockServer.expect(ExpectedCount.manyTimes(), requestTo("http://test.com/users/" + userId))
                     .andExpect(method(HttpMethod.GET))
                     .andRespond(
                             withStatus(HttpStatus.OK)
