@@ -12,9 +12,8 @@ import lombok.Setter;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 import java.util.UUID;
-
-import static java.util.Optional.ofNullable;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -51,7 +50,7 @@ public class MembershipDto {
         }
         return MembershipDto.builder()
                 .id(membership.getId())
-                .roleId(ofNullable(membership.getRole()).map(Role::getId).orElse(null))
+                .roleId(Optional.ofNullable(membership.getRole()).map(Role::getId).orElse(null))
                 .userId(membership.getUserId())
                 .teamId(membership.getTeamId())
                 .build();

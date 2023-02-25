@@ -15,7 +15,6 @@ import java.util.Optional;
 
 import static com.ecore.roles.utils.TestData.DEVELOPER_ROLE;
 import static com.ecore.roles.utils.TestData.UUID_1;
-import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -69,6 +68,6 @@ class RolesServiceTest {
         ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class,
                 () -> rolesService.getRole(UUID_1));
 
-        assertEquals(format("Role %s not found", UUID_1), exception.getMessage());
+        assertEquals(String.format("Role %s not found", UUID_1), exception.getMessage());
     }
 }

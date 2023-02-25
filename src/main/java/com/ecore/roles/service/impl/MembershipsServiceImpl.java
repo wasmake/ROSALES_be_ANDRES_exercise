@@ -16,9 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
-
-import static java.util.Optional.ofNullable;
 
 @Log4j2
 @Service
@@ -41,7 +40,7 @@ public class MembershipsServiceImpl implements MembershipsService {
     @Override
     public Membership assignRoleToMembership(@NonNull Membership m) {
 
-        UUID roleId = ofNullable(m.getRole()).map(Role::getId)
+        UUID roleId = Optional.ofNullable(m.getRole()).map(Role::getId)
                 .orElseThrow(() -> new InvalidArgumentException(Role.class));
         UUID teamId = m.getTeamId();
 

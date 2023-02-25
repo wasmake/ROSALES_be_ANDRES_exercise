@@ -24,7 +24,6 @@ import static com.ecore.roles.utils.RestAssuredHelper.getRoles;
 import static com.ecore.roles.utils.RestAssuredHelper.sendRequest;
 import static com.ecore.roles.utils.TestData.*;
 import static io.restassured.RestAssured.when;
-import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -119,7 +118,7 @@ public class RolesApiTest {
     @Test
     void shouldFailToGetRoleById() {
         getRole(UUID_1)
-                .validate(404, format("Role %s not found", UUID_1));
+                .validate(404, String.format("Role %s not found", UUID_1));
     }
 
     @Test
@@ -152,6 +151,6 @@ public class RolesApiTest {
     void shouldFailToGetRoleByUserIdAndTeamIdWhenItDoesNotExist() {
         mockGetTeamById(mockServer, UUID_1, null);
         getRole(GIANNI_USER_UUID, UUID_1)
-                .validate(404, format("Team %s not found", UUID_1));
+                .validate(404, String.format("Team %s not found", UUID_1));
     }
 }
