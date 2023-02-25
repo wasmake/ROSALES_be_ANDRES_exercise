@@ -4,7 +4,7 @@ import com.ecore.roles.model.Membership;
 import com.ecore.roles.model.Role;
 import com.ecore.roles.repository.RoleRepository;
 import com.ecore.roles.utils.RestAssuredHelper;
-import com.ecore.roles.web.dto.RoleDto;
+import com.ecore.roles.model.dto.RoleDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class RolesApiTest {
+public class RolesOperationsTest {
 
     private final RestTemplate restTemplate;
     private final RoleRepository roleRepository;
@@ -39,7 +39,7 @@ public class RolesApiTest {
     private int port;
 
     @Autowired
-    public RolesApiTest(RestTemplate restTemplate, RoleRepository roleRepository) {
+    public RolesOperationsTest(RestTemplate restTemplate, RoleRepository roleRepository) {
         this.restTemplate = restTemplate;
         this.roleRepository = roleRepository;
     }
@@ -64,9 +64,9 @@ public class RolesApiTest {
     void shouldCreateNewRole() {
         Role expectedRole = DEVOPS_ROLE();
 
-        RoleDto actualRole = createRole(expectedRole)
+        RoleDTO actualRole = createRole(expectedRole)
                 .statusCode(201)
-                .extract().as(RoleDto.class);
+                .extract().as(RoleDTO.class);
 
         assertThat(actualRole.getName()).isEqualTo(expectedRole.getName());
     }
@@ -97,13 +97,13 @@ public class RolesApiTest {
 
     @Test
     void shouldGetAllRoles() {
-        RoleDto[] roles = getRoles()
-                .extract().as(RoleDto[].class);
+        RoleDTO[] roles = getRoles()
+                .extract().as(RoleDTO[].class);
 
         assertThat(roles.length).isGreaterThanOrEqualTo(3);
-        assertThat(roles).contains(RoleDto.fromModel(DEVELOPER_ROLE()));
-        assertThat(roles).contains(RoleDto.fromModel(PRODUCT_OWNER_ROLE()));
-        assertThat(roles).contains(RoleDto.fromModel(TESTER_ROLE()));
+        assertThat(roles).contains(RoleDTO.fromModel(DEVELOPER_ROLE()));
+        assertThat(roles).contains(RoleDTO.fromModel(PRODUCT_OWNER_ROLE()));
+        assertThat(roles).contains(RoleDTO.fromModel(TESTER_ROLE()));
     }
 
     @Test

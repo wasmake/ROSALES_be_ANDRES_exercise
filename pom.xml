@@ -137,7 +137,7 @@
                     <excludes>
                         <exclude>**/model/**</exclude>
                         <exclude>**/entity/**</exclude>
-                        <exclude>**/dto/**</exclude>
+                        <exclude>**/controller/**</exclude>
                         <exclude>**/exception/ErrorResponse**</exclude>
                         <exclude>**/RolesApplication.*</exclude>
                     </excludes>

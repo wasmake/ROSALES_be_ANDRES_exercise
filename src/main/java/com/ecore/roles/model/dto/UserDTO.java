@@ -1,4 +1,4 @@
-package com.ecore.roles.web.dto;
+package com.ecore.roles.model.dto;
 
 import com.ecore.roles.client.model.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -18,7 +18,7 @@ import java.util.UUID;
 @Setter
 @Builder
 @EqualsAndHashCode
-public class UserDto {
+public class UserDTO {
 
     @JsonProperty
     private UUID id;
@@ -41,11 +41,11 @@ public class UserDto {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String location;
 
-    public static UserDto fromModel(User user) {
+    public static UserDTO fromModel(User user) {
         if (user == null) {
             return null;
         }
-        return UserDto.builder()
+        return UserDTO.builder()
                 .id(user.getId())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())

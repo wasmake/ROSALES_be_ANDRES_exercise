@@ -1,9 +1,9 @@
-package com.ecore.roles.web.rest;
+package com.ecore.roles.controller;
 
 import com.ecore.roles.model.Role;
 import com.ecore.roles.service.RolesService;
-import com.ecore.roles.web.RolesApi;
-import com.ecore.roles.web.dto.RoleDto;
+import com.ecore.roles.controller.operation.RolesOperations;
+import com.ecore.roles.model.dto.RoleDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static com.ecore.roles.web.dto.RoleDto.fromModel;
+import static com.ecore.roles.model.dto.RoleDTO.fromModel;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/v1/roles")
-public class RolesRestController implements RolesApi {
+public class RolesController implements RolesOperations {
 
     private final RolesService rolesService;
 
@@ -26,8 +26,8 @@ public class RolesRestController implements RolesApi {
     @PostMapping(
             consumes = {"application/json"},
             produces = {"application/json"})
-    public ResponseEntity<RoleDto> createRole(
-            @Valid @RequestBody RoleDto role) {
+    public ResponseEntity<RoleDTO> createRole(
+            @Valid @RequestBody RoleDTO role) {
         return ResponseEntity
                 .status(201)
                 .body(fromModel(rolesService.createRole(role.toModel())));
@@ -36,27 +36,27 @@ public class RolesRestController implements RolesApi {
     @Override
     @GetMapping(
             produces = {"application/json"})
-    public ResponseEntity<List<RoleDto>> getRoles() {
+    public ResponseEntity<List<RoleDTO>> getRoles() {
 
         List<Role> getRoles = rolesService.getRoles();
 
-        List<RoleDto> roleDtoList = new ArrayList<>();
+        List<RoleDTO> roleDTOList = new ArrayList<>();
 
         for (Role role : getRoles) {
-            RoleDto roleDto = fromModel(role);
-            roleDtoList.add(roleDto);
+            RoleDTO roleDto = fromModel(role);
+            roleDTOList.add(roleDto);
         }
 
         return ResponseEntity
                 .status(200)
-                .body(roleDtoList);
+                .body(roleDTOList);
     }
 
     @Override
     @GetMapping(
             path = "/{roleId}",
             produces = {"application/json"})
-    public ResponseEntity<RoleDto> getRole(
+    public ResponseEntity<RoleDTO> getRole(
             @PathVariable UUID roleId) {
         return ResponseEntity
                 .status(200)
@@ -67,7 +67,7 @@ public class RolesRestController implements RolesApi {
     @GetMapping(
             path = "/search",
             produces = {"application/json"})
-    public ResponseEntity<RoleDto> getRole(
+    public ResponseEntity<RoleDTO> getRole(
             @RequestParam UUID teamId,
             @RequestParam UUID teamMemberId) {
         return ResponseEntity

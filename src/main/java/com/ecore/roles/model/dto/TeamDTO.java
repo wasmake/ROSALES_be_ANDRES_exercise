@@ -1,4 +1,4 @@
-package com.ecore.roles.web.dto;
+package com.ecore.roles.model.dto;
 
 import com.ecore.roles.client.model.Team;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -19,7 +19,7 @@ import java.util.UUID;
 @Setter
 @Builder
 @EqualsAndHashCode
-public class TeamDto {
+public class TeamDTO {
 
     @JsonProperty
     private UUID id;
@@ -35,11 +35,11 @@ public class TeamDto {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<UUID> teamMemberIds;
 
-    public static TeamDto fromModel(Team team) {
+    public static TeamDTO fromModel(Team team) {
         if (team == null) {
             return null;
         }
-        return TeamDto.builder()
+        return TeamDTO.builder()
                 .id(team.getId())
                 .name(team.getName())
                 .teamLeadId(team.getTeamLeadId())
