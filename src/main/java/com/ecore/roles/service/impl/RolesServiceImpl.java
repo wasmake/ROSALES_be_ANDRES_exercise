@@ -8,7 +8,6 @@ import com.ecore.roles.model.Membership;
 import com.ecore.roles.model.Role;
 import com.ecore.roles.repository.MembershipRepository;
 import com.ecore.roles.repository.RoleRepository;
-import com.ecore.roles.service.MembershipsService;
 import com.ecore.roles.service.RolesService;
 import com.ecore.roles.service.TeamsService;
 import com.ecore.roles.service.UsersService;

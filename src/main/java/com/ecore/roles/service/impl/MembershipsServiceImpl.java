@@ -58,7 +58,8 @@ public class MembershipsServiceImpl implements MembershipsService {
         }
 
         if (!team.getTeamMemberIds().contains(m.getUserId())) {
-            throw new InvalidArgumentException(Membership.class, "The provided user doesn't belong to the provided team.");
+            throw new InvalidArgumentException(Membership.class,
+                    "The provided user doesn't belong to the provided team.");
         }
 
         return membershipRepository.save(m);
