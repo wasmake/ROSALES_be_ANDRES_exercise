@@ -14,10 +14,11 @@ import com.ecore.roles.service.UsersService;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Log4j2
 @Service
@@ -70,8 +71,40 @@ public class RolesServiceImpl implements RolesService {
     }
 
     @Override
-    public List<Role> getRoles() {
-        return roleRepository.findAll();
+    public List<Role> getRoles(UUID teamId, UUID memberId) {
+        if (teamId == null && memberId == null) {
+            return roleRepository.findAll();
+        }
+
+        ExampleMatcher matcher = ExampleMatcher.matching();
+
+        if (teamId != null) {
+            matcher = matcher.withMatcher("teamId", ExampleMatcher.GenericPropertyMatchers.exact());
+        }
+
+        if (memberId != null) {
+            matcher = matcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.exact());
+        }
+
+        Example<Membership> example = Example.of(
+                Membership.builder().teamId(teamId).userId(memberId).build(),
+                matcher
+        );
+        List<Membership> memberships = membershipRepository.findAll(example);
+        List<Role> uniqueRoles = new ArrayList<>();
+        Set<UUID> roleIds = new HashSet<>();
+
+        for (Membership membership : memberships) {
+            Role role = membership.getRole();
+
+            if (roleIds.add(role.getId())) {
+                // if the roleIds set did not contain the role id,
+                // add the role to the uniqueRoles list
+                uniqueRoles.add(role);
+            }
+        }
+
+        return uniqueRoles;
     }
 
     private Role getDefaultRole() {

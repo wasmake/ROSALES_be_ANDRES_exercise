@@ -36,13 +36,14 @@ public class RolesController implements RolesOperations {
     @Override
     @GetMapping(
             produces = {"application/json"})
-    public ResponseEntity<List<RoleDTO>> getRoles() {
-
-        List<Role> getRoles = rolesService.getRoles();
-
+    public ResponseEntity<List<RoleDTO>> getRoles(
+            @RequestParam(required = false) UUID teamId,
+            @RequestParam(required = false) UUID teamMemberId
+    ) {
+        List<Role> roles = rolesService.getRoles(teamId, teamMemberId);
         List<RoleDTO> roleDTOList = new ArrayList<>();
 
-        for (Role role : getRoles) {
+        for (Role role : roles) {
             RoleDTO roleDto = fromModel(role);
             roleDTOList.add(roleDto);
         }

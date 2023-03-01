@@ -11,13 +11,15 @@ public interface RolesOperations {
     ResponseEntity<RoleDTO> createRole(
             RoleDTO role);
 
-    ResponseEntity<List<RoleDTO>> getRoles();
+    ResponseEntity<List<RoleDTO>> getRoles(
+            UUID teamId,
+            UUID teamMemberId);
 
     ResponseEntity<RoleDTO> getRole(
             UUID roleId);
 
     ResponseEntity<RoleDTO> getRole(
-            UUID teamMemberId,
-            UUID teamId);
+            UUID teamId,
+            UUID teamMemberId);
 
 }
