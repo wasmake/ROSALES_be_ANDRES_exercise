@@ -39,7 +39,7 @@ public class MembershipsOperationsTests {
     @BeforeEach
     void setUp() {
         mockServer = MockRestServiceServer.createServer(restTemplate);
-        RestAssuredHelper.setUp(port);
+        RestAssuredHelper.setup(port);
         membershipRepository.deleteAll();
     }
 

@@ -47,7 +47,7 @@ public class RolesOperationsTest {
     @BeforeEach
     void setUp() {
         mockServer = MockRestServiceServer.createServer(restTemplate);
-        RestAssuredHelper.setUp(port);
+        RestAssuredHelper.setup(port);
         Optional<Role> devOpsRole = roleRepository.findByName(DEVOPS_ROLE().getName());
         devOpsRole.ifPresent(roleRepository::delete);
     }
