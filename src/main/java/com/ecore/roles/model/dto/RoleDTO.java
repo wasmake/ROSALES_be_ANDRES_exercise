@@ -1,4 +1,4 @@
-package com.ecore.roles.web.dto;
+package com.ecore.roles.model.dto;
 
 import com.ecore.roles.model.Role;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,7 +18,7 @@ import java.util.UUID;
 @Setter
 @Builder
 @EqualsAndHashCode
-public class RoleDto {
+public class RoleDTO {
 
     @JsonProperty
     private UUID id;
@@ -26,11 +26,11 @@ public class RoleDto {
     @NotBlank
     private String name;
 
-    public static RoleDto fromModel(Role role) {
+    public static RoleDTO fromModel(Role role) {
         if (role == null) {
             return null;
         }
-        return RoleDto.builder()
+        return RoleDTO.builder()
                 .id(role.getId())
                 .name(role.getName())
                 .build();

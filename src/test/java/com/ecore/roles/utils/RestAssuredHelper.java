@@ -2,8 +2,8 @@ package com.ecore.roles.utils;
 
 import com.ecore.roles.model.Membership;
 import com.ecore.roles.model.Role;
-import com.ecore.roles.web.dto.MembershipDto;
-import com.ecore.roles.web.dto.RoleDto;
+import com.ecore.roles.model.dto.MembershipDTO;
+import com.ecore.roles.model.dto.RoleDTO;
 import io.restassured.RestAssured;
 import io.restassured.parsing.Parser;
 import io.restassured.response.ExtractableResponse;
@@ -20,7 +20,7 @@ import static io.restassured.http.ContentType.JSON;
 
 public class RestAssuredHelper {
 
-    public static void setUp(int port) {
+    public static void setup(int port) {
         RestAssured.reset();
         RestAssured.defaultParser = Parser.JSON;
         RestAssured.baseURI = "http://localhost:" + port;
@@ -31,7 +31,7 @@ public class RestAssuredHelper {
     }
 
     public static EcoreValidatableResponse createRole(Role role) {
-        return sendRequest(givenNullableBody(RoleDto.fromModel(role))
+        return sendRequest(givenNullableBody(RoleDTO.fromModel(role))
                 .contentType(JSON)
                 .when()
                 .post("/v1/roles")
@@ -62,7 +62,7 @@ public class RestAssuredHelper {
     }
 
     public static EcoreValidatableResponse createMembership(Membership membership) {
-        return sendRequest(givenNullableBody(MembershipDto.fromModel(membership))
+        return sendRequest(givenNullableBody(MembershipDTO.fromModel(membership))
                 .contentType(JSON)
                 .when()
                 .post("/v1/roles/memberships")

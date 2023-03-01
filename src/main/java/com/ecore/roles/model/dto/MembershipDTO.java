@@ -1,4 +1,4 @@
-package com.ecore.roles.web.dto;
+package com.ecore.roles.model.dto;
 
 import com.ecore.roles.model.Membership;
 import com.ecore.roles.model.Role;
@@ -12,9 +12,8 @@ import lombok.Setter;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 import java.util.UUID;
-
-import static java.util.Optional.ofNullable;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,7 +21,7 @@ import static java.util.Optional.ofNullable;
 @Setter
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class MembershipDto {
+public class MembershipDTO {
 
     @JsonProperty
     private UUID id;
@@ -45,13 +44,13 @@ public class MembershipDto {
     @EqualsAndHashCode.Include
     private UUID teamId;
 
-    public static MembershipDto fromModel(Membership membership) {
+    public static MembershipDTO fromModel(Membership membership) {
         if (membership == null) {
             return null;
         }
-        return MembershipDto.builder()
+        return MembershipDTO.builder()
                 .id(membership.getId())
-                .roleId(ofNullable(membership.getRole()).map(Role::getId).orElse(null))
+                .roleId(Optional.ofNullable(membership.getRole()).map(Role::getId).orElse(null))
                 .userId(membership.getUserId())
                 .teamId(membership.getTeamId())
                 .build();
